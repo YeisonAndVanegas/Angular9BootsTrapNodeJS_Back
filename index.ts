@@ -34,8 +34,16 @@ server.app.use('/tecnologia', tecnologiasRutas);
 server.app.use('/noticias', noticiasRutas);
 
 // Conectar Base de Datos
+
+let mongoDB: string;
+if(process.env.NODE_ENV === 'production'){
+    mongoDB = 'mongodb+srv://atlasAdmin:Sophos.2020*@cluster0.z22h5.mongodb.net/YeiDJBase'
+} else {
+    mongoDB = 'mongodb://localhost:27017/YeiDJBase'
+}
+
 mongoose.connect(
-    'mongodb://localhost:27017/YeiDJBase',
+    mongoDB,
     { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false },
     (err) => {
         if (err) throw "err";

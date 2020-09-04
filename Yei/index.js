@@ -30,7 +30,14 @@ server.app.use('/sobreMi', sobreMi_1.default);
 server.app.use('/tecnologia', tecnologia_1.default);
 server.app.use('/noticias', noticias_1.default);
 // Conectar Base de Datos
-mongoose_1.default.connect('mongodb://localhost:27017/YeiDJBase', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false }, (err) => {
+let mongoDB;
+if (process.env.NODE_ENV === 'production') {
+    mongoDB = 'mongodb+srv://atlasAdmin:Sophos.2020*@cluster0.z22h5.mongodb.net/YeiDJBase';
+}
+else {
+    mongoDB = 'mongodb://localhost:27017/YeiDJBase';
+}
+mongoose_1.default.connect(mongoDB, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false }, (err) => {
     if (err)
         throw "err";
     console.log('Base de datos ONLINE');
